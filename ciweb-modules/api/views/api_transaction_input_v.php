@@ -14,7 +14,7 @@
                 <div id="mainTable" class="box-body">
                     <p>
                         *) only the
-                        <b style="color:red;">API - Trx Record</b> Pending
+                        <b style="color:red;">API - Trx Input</b> Pending
                     </p>
                     <table class="table table-bordered table-condensed table-hover table-striped dataTable">
                         <thead>

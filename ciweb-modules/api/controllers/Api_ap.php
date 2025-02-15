@@ -1,6 +1,6 @@
 <?php
 
-class Api_ap2 extends Bks_Controller {
+class Api_ap extends Bks_Controller {
 
     function __construct() {
         $config = array('modules' => 'api', 'jsfiles' => array(''));
@@ -10,7 +10,7 @@ class Api_ap2 extends Bks_Controller {
         $this->userId = $this->auth['id'];
     }
     
-    function ap2_post_api(){
+    function ap_post_api(){
         checkIfNotAjax();
         $this->libauth->check(__METHOD__);
         $postData = $this->input->post();       
@@ -42,7 +42,7 @@ class Api_ap2 extends Bks_Controller {
 
         $url = 'https://api-ecsysdev.angkasapura2.co.id/api/auth/login'; // Trial
         // $url  = 'https://api-ecsys.angkasapura2.co.id/api/auth/login'; // Production
-        $login = $this->ap2_login($url);
+        $login = $this->ap_login($url);
         if($login) {
             $resp_login = json_decode($login,true);
             $token = $resp_login['token'];
@@ -50,21 +50,21 @@ class Api_ap2 extends Bks_Controller {
                 if($method === 'trxrecord'){
                     $url = 'https://api-ecsysdev.angkasapura2.co.id/api/v1/transaction/'; // Trial
                     // $url = 'https://api-ecsys.angkasapura2.co.id/api/v1/transaction/'; // Production
-                    $this->ap2_trx_reccord($url, $token, $method, $id);
+                    $this->ap_trx_reccord($url, $token, $method, $id);
 
                 } else if($method === 'refundtrx'){
                     $url = 'https://api-ecsysdev.angkasapura2.co.id/api/v1/transaction/adjustment'; // Trial
                     // $url = 'https://api-ecsys.angkasapura2.co.id/api/v1/transaction/adjustment'; // Production
-                    $this->ap2_trx_adjustment($url, $token, $method, $id);
+                    $this->ap_trx_adjustment($url, $token, $method, $id);
 
                 } else if($method === 'gettrx'){
                     $url = 'https://api-ecsysdev.angkasapura2.co.id/api/v1/simulation/'; // Trial
                     // $url = 'https://api-ecsys.angkasapura2.co.id/api/v1/simulation/'; // Production
-                    $this->db->truncate('trx_api_ap2_get');
-                    $this->ap2_trx_get($url, $token, $company_id, $store_id, $tr_date, $method);
+                    $this->db->truncate('trx_api_ap_get');
+                    $this->ap_trx_get($url, $token, $company_id, $store_id, $tr_date, $method);
 
                 } else if($method === 'getstore'){
-                    $this->ap2_get_store($company_id, $resp_login);
+                    $this->ap_get_store($company_id, $resp_login);
                 }
             } else {
                 echo "token IS NULL or " . $token;
@@ -75,13 +75,14 @@ class Api_ap2 extends Bks_Controller {
         }        
     }
 
-    public function ap2_login($url){
-        $data = json_encode(array('username'=>'api.indocev.cgk', 'password'=>'api.indocev.cgk'));
+    public function ap_login($url){
+        // $data = json_encode(array('username'=>'api.indocev.cgk', 'password'=>'api.indocev.cgk')); // CGK
+        $data = json_encode(array('username'=>'api.icv', 'password'=>'api.icv')); // SBY
         $result = $this->Apimdl->callcurl($url, $data, null);
         return $result;
     }    
 
-    public function ap2_trx_reccord($url, $token, $method, $id){
+    public function ap_trx_reccord($url, $token, $method, $id){
         if($id !== null){
             $status_trx = 1;
             $get_tr_header = $this->db->select('*')
@@ -171,13 +172,13 @@ class Api_ap2 extends Bks_Controller {
                                 $resp_status = $resArr['status'];
                                 $resp_success_insert = $resArr['success_insert'];
                                 $resp_failed_insert = $resArr['failed_insert'];
-                                $this->db->insert('trx_api_ap2_log',
+                                $this->db->insert('trx_api_ap_log',
                                                     array(
                                                         'header_id' => $id,
                                                         'method' => $method,
-                                                        'ap2_status' => $resp_status,
-                                                        'ap2_success_insert' => $resp_success_insert,
-                                                        'ap2_failed_insert' => $resp_failed_insert,
+                                                        'ap_status' => $resp_status,
+                                                        'ap_success_insert' => $resp_success_insert,
+                                                        'ap_failed_insert' => $resp_failed_insert,
                                                         'created' => date('Y-m-d H:i:s', time()),
                                                         'createdby' => $this->userId
                                                         )
@@ -218,7 +219,7 @@ class Api_ap2 extends Bks_Controller {
         }        
     }
 
-    public function ap2_trx_adjustment($url, $token, $method, $id){
+    public function ap_trx_adjustment($url, $token, $method, $id){
         if($id !== null){
             $get_tr_header = $this->db->select('*')
                                  ->where(array('id'=>$id))
@@ -309,13 +310,13 @@ class Api_ap2 extends Bks_Controller {
                                 $resp_status = $resArr['status'];
                                 $resp_success_insert = $resArr['success_insert'];
                                 $resp_failed_insert = $resArr['failed_insert'];
-                                $this->db->insert('trx_api_ap2_log',
+                                $this->db->insert('trx_api_ap_log',
                                                     array(
                                                         'header_id' => $id,
                                                         'method' => $method,
-                                                        'ap2_status' => $resp_status,
-                                                        'ap2_success_insert' => $resp_success_insert,
-                                                        'ap2_failed_insert' => $resp_failed_insert,
+                                                        'ap_status' => $resp_status,
+                                                        'ap_success_insert' => $resp_success_insert,
+                                                        'ap_failed_insert' => $resp_failed_insert,
                                                         'created' => date('Y-m-d H:i:s', time()),
                                                         'createdby' => $this->userId
                                                         )
@@ -374,7 +375,7 @@ class Api_ap2 extends Bks_Controller {
         }        
     }
 
-    public function ap2_trx_get($url, $token, $company_id, $store_id, $tr_date, $method){
+    public function ap_trx_get($url, $token, $company_id, $store_id, $tr_date, $method){
         if($store_id !== null){
             $get_store_ref_id = $this->db->query("SELECT * FROM m_company_store WHERE id = $store_id AND company_id = $company_id")->result();
             if($get_store_ref_id[0]->store_reference_id !== null){                
@@ -435,7 +436,7 @@ class Api_ap2 extends Bks_Controller {
                                             'createdby' => $this->userId
                                         );
                             if(count($data_d) > 0){
-                                $response = $this->db->insert('trx_api_ap2_get', $data_d);
+                                $response = $this->db->insert('trx_api_ap_get', $data_d);
                                 // echo $this->db->last_query();exit;
                             }
                         }
@@ -465,7 +466,7 @@ class Api_ap2 extends Bks_Controller {
         }        
     }
 
-    public function ap2_get_store($company_id, $resArr){
+    public function ap_get_store($company_id, $resArr){
         $this->db->trans_begin();
         if(isset($resArr['user']['store']) && $resArr['user']['store'] !== null){
             foreach ($resArr['user']['store'] as $key => $item) {

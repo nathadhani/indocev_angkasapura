@@ -82,16 +82,10 @@
                                     $company_id = $auth['company_id'];
                                     $get_AP = $this->db->query("SELECT api_angkasapura, api_method FROM m_company WHERE id = $company_id ")->result(); 
                                     if($get_AP){                                                                          
-                                        if($get_AP[0]->api_angkasapura === 'AP1' && $get_AP[0]->api_method === '1') {                     
+                                        if($get_AP[0]->api_method === '1') {                     
                                 ?>
-                                            <a style="width:110px;" id="btn-submit" class="btn btn-primary" title="API - Transaction Reccord">API - Record</a>
-                                            <a style="width:110px;" id="btn-advice" class="btn btn-primary" title="API - Transaction Advice">API - Advice</a>
-                                            <a style="width:110px;" id="btn-cancel" class="btn btn-primary" title="API - Transaction Refund">API - Refund</a>
-                                        <?php     
-                                            } else if($get_AP[0]->api_angkasapura === 'AP2' && $get_AP[0]->api_method === '1') {                                     
-                                        ?>
-                                            <a style="width:110px;" id="btn-submit" class="btn btn-primary" title="API - Input Transaction">API - Record</a>
-                                            <a style="width:110px;" id="btn-cancel" class="btn btn-primary" title="API - Transaction Adjusment">API - Refund</a>
+                                            <a style="width:110px;" id="btn-submit" class="btn btn-primary" title="API - Input Transaction">API - Input</a>
+                                            <a style="width:110px;" id="btn-cancel" class="btn btn-primary" title="API - Transaction Adjusment">API - Adjustment</a>
                                         <?php 
                                             } else {
                                         ?>   
@@ -114,18 +108,11 @@
                                     <div class="row" id="pinfo">
                                         <div class="col-md-12">
                                             <?php                                   
-                                                if($get_AP[0]->api_angkasapura === 'AP1' && $get_AP[0]->api_method === '1') {
+                                                if($get_AP[0]->api_method === '1') {
                                             ?>
                                                 <br>API Information :
-                                                <span id="pinfo_apirecord"><strong style="color:black;font-weight:bolder;"><br>API - Record </strong> : Untuk mengirim data transaksi ke angkasapura</span>
-                                                <span id="pinfo_apiadvice"><strong style="color:black;font-weight:bolder;"><br>API - Advice </strong> : Untuk menanyakan hasil pengiriman transaksi ke angkasapura</span>
-                                                <span id="pinfo_apirefund"><strong style="color:black;font-weight:bolder;"><br>API - Refund </strong> : Untuk membatalkan transaksi atau membatalkan data transaksi yang sudah dikirimkan ke angkasapura</span>
-                                            <?php
-                                                } else if($get_AP[0]->api_angkasapura === 'AP2' && $get_AP[0]->api_method === '1') {
-                                            ?>
-                                                <br>API Information :
-                                                <span id="pinfo_apirecord"><strong style="color:black;font-weight:bolder;"><br>API - Record </strong> : Untuk mengirim data transaksi ke angkasapura</span>
-                                                <span id="pinfo_apirefund"><strong style="color:black;font-weight:bolder;"><br>API - Refund </strong> : Untuk membatalkan transaksi atau membatalkan data transaksi yang sudah dikirimkan ke angkasapura</span>
+                                                <span id="pinfo_apirecord"><strong style="color:black;font-weight:bolder;"><br>API - Input </strong> : Untuk mengirim data transaksi ke angkasapura</span>
+                                                <span id="pinfo_apirefund"><strong style="color:black;font-weight:bolder;"><br>API - Adjustment </strong> : Untuk membatalkan transaksi atau membatalkan data transaksi yang sudah dikirimkan ke angkasapura</span>
                                             <?php
                                                 }
                                             ?>
@@ -135,47 +122,12 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <?php
-                                                if($get_AP[0]->api_angkasapura === 'AP1' && $get_AP[0]->api_method === '1') {
+                                                if($get_AP[0]->api_method === '1') {
                                                     $id = $this->uri->segment(6);
-                                                    $resp_api = $this->db->query("SELECT * FROM trx_api_ap1_log WHERE header_id = $id")->result_array(); 
+                                                    $resp_api = $this->db->query("SELECT * FROM trx_api_ap_log WHERE header_id = $id")->result_array(); 
                                                     // echo $this->db->last_query();exit;
                                                     if($resp_api){
                                             ?>              
-                                                            <br>
-                                                            <table class="table table-bordered table-condensed table-hover" width="100%">
-                                                                <thead>
-                                                                    <span style="color:black;font-weight:bolder;">Response API</span>
-                                                                    <tr>
-                                                                        <th style='vertical-align: middle;text-align:center;'>Method</th>
-                                                                        <th style='vertical-align: middle;text-align:center;'>Rc Code</th>
-                                                                        <th style='vertical-align: middle;text-align:center;'>Rc Message</th>
-                                                                        <th style='vertical-align: middle;text-align:center;'>Timestamp</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                            <?php 
-                                                        foreach($resp_api AS $row){
-                                            ?>
-                                                                
-                                                                    <tr>
-                                                                        <td width="10%" style='vertical-align: middle;text-align:center;'><?php echo $row['method'];?></td>
-                                                                        <td width="10%"  style='vertical-align: middle;text-align:center;'><?php echo $row['ap1_rc_code'];?></td>
-                                                                        <td width="65%" style='vertical-align: middle;'><?php echo $row['ap1_rc_message'];?></td>
-                                                                        <td width="15%" style='vertical-align: middle;'><?php echo date_format(date_create($row['ap1_timestamp']),"d/m/Y H:i:s");?></td>
-                                                                    </tr>
-                                            <?php
-                                                        }
-                                            ?> 
-                                                                </tbody>
-                                                            </table>                                                                                                           
-                                            <?php     
-                                                    }
-                                                } else if($get_AP[0]->api_angkasapura === 'AP2' && $get_AP[0]->api_method === '1') {
-                                                    $id = $this->uri->segment(6);
-                                                    $resp_api = $this->db->query("SELECT * FROM trx_api_ap2_log WHERE header_id = $id")->result_array();
-                                                    // echo $this->db->last_query();exit;
-                                                    if($resp_api){                                        
-                                            ?>
                                                         <br>
                                                         <!-- <span style="color:black;font-weight:bolder;font-family:Arial Black;">Response API</span> -->
                                                         <table class="table table-bordered table-condensed table-hover" width="100%">
@@ -196,9 +148,9 @@
                                                             
                                                                 <tr>
                                                                     <td style='vertical-align: middle;text-align:center;'><?php echo $row['method'];?></td>
-                                                                    <td style='vertical-align: middle;text-align:center;'><?php echo ($row['ap2_status'] == 1 ? 'true' : 'false');?></td>
-                                                                    <td style='vertical-align: middle;text-align:center;'><?php echo $row['ap2_success_insert'];?></td>
-                                                                    <td style='vertical-align: middle;text-align:center;'><?php echo $row['ap2_failed_insert'];?></td>
+                                                                    <td style='vertical-align: middle;text-align:center;'><?php echo ($row['ap_status'] == 1 ? 'true' : 'false');?></td>
+                                                                    <td style='vertical-align: middle;text-align:center;'><?php echo $row['ap_success_insert'];?></td>
+                                                                    <td style='vertical-align: middle;text-align:center;'><?php echo $row['ap_failed_insert'];?></td>
                                                                     <td><?php echo date_format(date_create($row['created']),"d/m/Y H:i:s");?></td>
                                                                 </tr>                                                
                                                         <?php } ?>            

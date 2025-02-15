@@ -10,7 +10,7 @@ class Home extends Bks_Controller {
         $this->company_id = $this->auth['company_id'];
         $this->api_method = $this->auth['api_method'];  
         // $config = array('modules' => 'home', 'jsfiles' => array('c3/d3.v3.min', 'c3/c3'), 'cssfiles' => array('c3/c3.min'));
-        if(in_array($this->userlevel_id, array('1')) && $this->usergroup_id > 1) {
+        if(in_array($this->userlevel_id, array('1','2')) && $this->usergroup_id > 1) {
             $config = array('modules' => 'dashboard', 'jsfiles' => array('dashboard'));
         } else {
             $config = array('modules' => 'home', 'jsfiles' => array('home2212'));
@@ -20,7 +20,7 @@ class Home extends Bks_Controller {
     
     Public function index() {
         $this->libauth->check(__METHOD__);        
-        if(in_array($this->userlevel_id, array('1')) && $this->usergroup_id > 1) {
+        if(in_array($this->userlevel_id, array('1','2')) && $this->usergroup_id > 1) {
             $this->template->title('Dashboard');
             $this->template->set('tsmall', 'Chart');
             $this->template->set('icon', 'fa fa-chart');

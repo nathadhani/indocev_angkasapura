@@ -11,11 +11,7 @@ class Api_transaction_input extends Bks_Controller {
     
     function index() {
         $this->libauth->check(__METHOD__);
-        if($this->auth['api_angkasapura'] == 'AP1'){
-            $this->template->title('Transaction Record');
-        } else {
-            $this->template->title('Transaction Input');
-        }        
+        $this->template->title('Transaction Input');
         $this->template->set('tsmall', 'API');
         $this->template->set('icon', 'fa fa-edit');
         $data['auth'] = $this->auth;

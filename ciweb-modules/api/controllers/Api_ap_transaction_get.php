@@ -1,9 +1,9 @@
 <?php
 
-class Api_ap2_transaction_get extends Bks_Controller {
+class Api_ap_transaction_get extends Bks_Controller {
 
     function __construct() {
-        $config = array('modules' => 'api', 'jsfiles' => array('api_ap2_transaction_get'));
+        $config = array('modules' => 'api', 'jsfiles' => array('api_ap_transaction_get'));
         parent::__construct($config);        
         $this->auth = $this->session->userdata( 'auth' );  
     }
@@ -14,7 +14,7 @@ class Api_ap2_transaction_get extends Bks_Controller {
         $this->template->set('tsmall', 'API');
         $this->template->set('icon', 'fa fa-edit');
         $data['auth'] = $this->auth;
-        $this->template->build('api/api_ap2_transaction_get_v', $data);
+        $this->template->build('api/api_ap_transaction_get_v', $data);
     }
     
     function excel(){
@@ -66,7 +66,7 @@ class Api_ap2_transaction_get extends Bks_Controller {
                                                 store_reference_id,
                                                 store_name,
                                                 store_address                                                
-                                        FROM v_trx_api_ap2_get_detail
+                                        FROM v_trx_api_ap_get_detail
                                         WHERE transaction_date = '$tanggal'
                                         AND company_id = $company_id
                                         AND store_id = $store_id
@@ -114,7 +114,7 @@ class Api_ap2_transaction_get extends Bks_Controller {
                                                 store_reference_id,
                                                 store_name,
                                                 store_address                                                
-                                        FROM v_trx_api_ap2_get_detail
+                                        FROM v_trx_api_ap_get_detail
                                         WHERE transaction_date = '$tanggal'
                                         AND company_id = $company_id
                                         ORDER BY store_reference_id, invoice_number, sequence ASC ");

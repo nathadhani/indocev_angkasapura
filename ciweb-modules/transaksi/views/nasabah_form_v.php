@@ -17,7 +17,7 @@
                         <h3 class="panel-title"><i class="fa fa-user"></i>&nbsp;Customer Profile / <strong id="ftitle"></strong></h3>
                         <ul class="panel-controls">
                             <button id="btn-buy" class="btn" style="width:110px;background-color:blue;color:white;"><i class="fa fa-shopping-cart"></i>Trx. Buy</button>
-                            <button id="btn-sale" class="btn" style="width:110px;background-color:red;color:white;"><i class="fa fa-shopping-cart"></i>Trx. Sale</button>
+                            <button id="btn-sale" class="btn" style="width:110px;background-color:red;color:white;"><i class="fa fa-shopping-cart"></i>Trx. Sell</button>
                         </ul>
                     </div>
                     <div class="panel-body">                        

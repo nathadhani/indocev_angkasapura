@@ -126,9 +126,6 @@
                 if(Number(Apimethod) == 1){
                     $("#btn-submit").show();
                     $("#btn-cancel").show();
-                    if(ApiAP === 'AP1'){
-                        $("#btn-advice").hide();
-                    }                
                     $("#pinfo").show();
                 }                
                 break;
@@ -145,11 +142,6 @@
                 lstatus += 'API - Record';
                 $("#btn-submit").hide();                
                 $("#pinfo").show();
-                if(ApiAP === 'AP1'){
-                    $("#btn-advice").show();
-                    $("#btn-cancel").show();
-                    $("#pinfo").show();
-                }            
                 $("#pinfo_apirecord").hide();    
                 break;
             case 4:
@@ -184,52 +176,21 @@
 
     $("#btn-submit").on('click', function (e) {
         e.preventDefault();
-        if(ApiAP === 'AP1'){
-            alertify.confirm("are you sure, API - Transaction Reccord ?", function (x) {
-                if (x) {
-                    api_ap1_trx_reccord(storeId, id_tr_header);
-                }   
-            });            
-        }
-        if(ApiAP === 'AP2'){
-            alertify.confirm("are you sure, API - Transaction Input ?", function (x) {
-                if (x) {
-                    api_ap2_trx_reccord(id_tr_header);
-                }
-            });
-        }
-    });
-    
-    $("#btn-advice").on('click', function (e) {
-        e.preventDefault();
-        if(Number(Apimethod) == 1){
-            if(ApiAP === 'AP1'){
-                alertify.confirm("are you sure, API - Transaction Advice ?", function (x) {
-                    if (x) {
-                        api_ap1_trx_advice(storeId, id_tr_header);
-                    }
-                });
+        alertify.confirm("are you sure, API - Transaction Input ?", function (x) {
+            if (x) {
+                api_ap_trx_reccord(id_tr_header);
             }
-        }
-    });
+        });
+    });    
 
     $("#btn-cancel").on('click', function (e) {
         e.preventDefault();
         if(Number(Apimethod) == 1){
-            if(ApiAP === 'AP1'){
-                alertify.confirm("are you sure, API - Transaction Refund ?", function (x) {
-                    if (x) {
-                        api_ap1_trx_refund(storeId, id_tr_header);                        
-                    }
-                });
-            }
-            if(ApiAP === 'AP2'){
-                alertify.confirm("are you sure, API - Transaction Adjustment ?", function (x) {
-                    if (x) {
-                        api_ap2_trx_refund(id_tr_header);                        
-                    }
-                });
-            }      
+            alertify.confirm("are you sure, API - Transaction Adjustment ?", function (x) {
+                if (x) {
+                    api_ap_trx_refund(id_tr_header);                        
+                }
+            });
         } else {
             alertify.confirm("are you sure, CANCEL transaction ?", function (x) {
                 if (x) {

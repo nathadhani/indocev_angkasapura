@@ -1,20 +1,20 @@
 <?php
 
-class Api_ap1_transaction_advice extends Bks_Controller {
+class Api_ap_transaction_adjustment extends Bks_Controller {
 
     function __construct() {
-        $config = array('modules' => 'api', 'jsfiles' => array('api_ap1_transaction_advice'));
+        $config = array('modules' => 'api', 'jsfiles' => array('api_ap_transaction_adjustment'));
         parent::__construct($config);        
         $this->auth = $this->session->userdata( 'auth' );        
     }
     
     function index() {
         $this->libauth->check(__METHOD__);
-        $this->template->title('Transaction Advice');
+        $this->template->title('Transaction Adjustment');
         $this->template->set('tsmall', 'API');
         $this->template->set('icon', 'fa fa-edit');
         $data['auth'] = $this->auth;
-        $this->template->build('api/api_ap1_transaction_advice_v', $data);
+        $this->template->build('api/api_ap_transaction_adjustment_v', $data);
     }
     
     function getData() {
@@ -41,7 +41,7 @@ class Api_ap1_transaction_advice extends Bks_Controller {
         $where[2]['data']  = $tanggal;
         $where[2]['sql']   = 'where';
         
-        $where2 = "status IN (4)";
+        $where2 = "status IN (2)";
 
         $cpData = $this->Bksmdl->getDataTable($where, $where2);
         $this->Bksmdl->outputToJson($cpData);

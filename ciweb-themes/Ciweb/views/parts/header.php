@@ -1,10 +1,3 @@
-<?php
-    $auth = $this->session->userdata('auth');
-    $usergroup_id = $auth['usergroup_id'];
-    $userlevel_id = $auth['userlevel_id'];
-    $company_id = $auth['company_id']; 
-    // phpinfo();exit;    
-?>
 <!DOCTYPE html>
 <html lang="en">
     <head>     
@@ -40,15 +33,9 @@
         <script type="text/javascript">var baseUrl = '<?php echo base_url(); ?>';</script>
         <script type="text/javascript" src="assets/themes/js/plugins/jquery/jquery.min.js"></script>
     </head>
-    <body oncontextmenu="return false">
+    <body oncontextmenu="return true">
         <!-- START PAGE CONTAINER -->
-        <?php 
-            if(in_array($userlevel_id, array('2'))) {
-        ?>
-            <div class="page-container page-navigation-top">
-         <?php } else { ?>
-            <div class="page-container page-navigation-top-fix">
-        <?php } ?>       
+        <div class="page-container page-navigation-top-fixed">
         <div class="ajax-loader">
             <img src="assets/img/loading1.gif" class="img-responsive"/>        
         </div>

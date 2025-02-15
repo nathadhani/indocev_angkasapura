@@ -30,7 +30,7 @@
         } else if($('#store_id').val() === null || $('#store_id').val() === ''){
             bksfn.errMsg('Store Belum Dipilih!');            
         } else {
-            var url = "api/api_ap2_transaction_get/excel/"+$('#tr_date').val()+"/"+$('#company_id').val()+"/"+$('#store_id').val();
+            var url = "api/api_ap_transaction_get/excel/"+$('#tr_date').val()+"/"+$('#company_id').val()+"/"+$('#store_id').val();
             $.ajax({
                 url: url,
                 type: 'POST',

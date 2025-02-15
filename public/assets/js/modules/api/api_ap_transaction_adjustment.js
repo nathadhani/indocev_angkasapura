@@ -44,7 +44,7 @@
             lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
             sDom: 'it<"row"lp>',
             ajax: {
-                url: baseUrl + 'api/api_ap2_transaction_adjustment/getData',
+                url: baseUrl + 'api/api_ap_transaction_adjustment/getData',
                 type: 'POST',
                 // beforeSend: function(){
                 //     $(".ajax-loader").height($(document).height());
