@@ -1,6 +1,6 @@
 var sisa_stock_amount = 0;
 var sisa_stock_sheet = 0;
-var xtr_id = (decrypt(tr_uri_code) === 'buy' ? 1 : decrypt(tr_uri_code) === 'sale' ? 2 : 0);
+var xtr_id = (decrypt(tr_uri_code) === 'buy' ? 1 : decrypt(tr_uri_code) === 'sell' ? 2 : 0);
 $("#xtrxbuy").hide();
 $("#xtrxsale").hide();
 if(xtr_id == 1){
@@ -370,7 +370,7 @@ $("#btn-add-row-detail").on('click', function (e) {
                 if(xtr_id == 1){ // Trx Buy                        
                     add_item();
                 }
-                if(xtr_id == 2){ // Trx Sale
+                if(xtr_id == 2){ // Trx Sell
                     if(sisa_stock_sheet > 0){
                         var sheet_input = parseInt(rupiah_to_number( ($("#sheet").val() == null || $("#sheet").val() == '' ? 0 : $("#sheet").val()) ));
                         if( sisa_stock_sheet < sheet_input ){
@@ -781,12 +781,7 @@ $("#btn-confirm").on('click', function (e) {
                                 if(d.tr_header_id !== null && d.tr_header_id !== ''){
                                     var storeId = d.store_id;
                                     var id_tr_header = d.tr_header_id;
-                                    if(ApiAP === 'AP1'){
-                                        api_ap1_trx_reccord(storeId, id_tr_header);
-                                    }
-                                    if(ApiAP === 'AP2'){
-                                        api_ap2_trx_reccord(id_tr_header);
-                                    }
+                                    api_ap_trx_reccord(id_tr_header);
                                 }
                             }    
                             tampil_header();

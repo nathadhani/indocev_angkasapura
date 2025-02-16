@@ -16,6 +16,21 @@ class Dashboard extends Bks_Controller {
         $this->template->set('icon', 'fa fa-chart');
         $this->template->build('dashboard/dashboard_v');
     }    
+
+    function getlastupdated(){
+        checkIfNotAjax();
+        // $this->libauth->check(__METHOD__);
+        $postData = $this->input->post();
+        $company_id = $postData['company_id'];
+        $store_id = $postData['store_id'];
+    
+        $query = $this->db->query("SELECT MAX(created) AS lastupdated FROM tr_header WHERE company_id = $company_id")->result();
+        if($store_id !== null && $store_id !== ''){
+            $query = $this->db->query("SELECT MAX(created) AS lastupdated FROM tr_header WHERE company_id = $company_id AND store_id = $store_id")->result();            
+        }
+        
+        echo json_encode($query, true);
+    }
     
     function getdatatable1() {
         checkIfNotAjax();

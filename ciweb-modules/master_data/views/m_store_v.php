@@ -80,7 +80,7 @@
                 <div class="panel-footer">
                     <button type="submit" class="btn btn-info" style="width:100px;">Submit</button>
                     <button type="reset" class="btn btn-default" style="width:100px;">Reset</button>
-                    <button id="btn-get-store-ap2" class="btn btn-danger pull-right" style="width:130px;">API - Get Store AP2</button>
+                    <button id="btn-get-store-ap" class="btn btn-danger pull-right" style="width:130px;">Get Store (API)</button>
                 </div>
             </div>
         </form>

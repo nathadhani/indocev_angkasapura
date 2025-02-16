@@ -75,7 +75,7 @@
                         return data;
                 }},
                 {data: 'tr_id',  width: "8%", render: function (data, type, row, meta) {
-                    var act = (data == '1') ? '<Stong style="color:blue;">Trx Buy</Stong>' : '<Stong style="color:red;">Trx Sale</Stong>';
+                    var act = (data == '1') ? '<Stong style="color:blue;">Trx Buy</Stong>' : '<Stong style="color:red;">Trx Sell</Stong>';
                     return act;
                 }},
                 {data: 'status', width: "10%", render: function (data, type, row, meta) {
@@ -103,7 +103,7 @@
                 });
             }    
             if ($(this).index() == 5) {
-                $(this).html('<select style="width:100%" type="text"><option value="">-</option><option value="1">Trx Buy</option><option value="2">Trx Sales</option><select/>');
+                $(this).html('<select style="width:100%" type="text"><option value="">-</option><option value="1">Trx Buy</option><option value="2">Trx Sell</option><select/>');
             }
             if ($(this).index() == 6) {
                 $(this).html('<select style="width:100%" type="text"><option value="">-</option><option value="1">Open</option><option value="2">Canceled</option><option value="3">Closed</option><select/>');
@@ -167,9 +167,6 @@ function lstatus_name(status_id) {
         case 3:
             lstatus += '<strong>API - Record</strong>';
             break;
-        case 4:
-            lstatus += '<strong>API - Advice</strong>';
-            break; 
         default:
             lstatus = '';
     }

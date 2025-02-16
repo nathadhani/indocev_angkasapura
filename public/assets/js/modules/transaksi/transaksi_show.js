@@ -1,6 +1,6 @@
 (function ($) {
     var storeId = '';
-    var xtr_id = (decrypt(tr_uri_code) === 'buy' ? 1 : decrypt(tr_uri_code) === 'sale' ? 2 : 0);
+    var xtr_id = (decrypt(tr_uri_code) === 'buy' ? 1 : decrypt(tr_uri_code) === 'sell' ? 2 : 0);
     back_to_page_show();
 
     function back_to_page_show(){
@@ -143,15 +143,6 @@
                 $("#btn-submit").hide();                
                 $("#pinfo").show();
                 $("#pinfo_apirecord").hide();    
-                break;
-            case 4:
-                lstatus += 'API - Advice';
-                $("#btn-submit").hide();
-                $("#btn-advice").hide();
-                $("#btn-cancel").show();
-                $("#pinfo").show();
-                $("#pinfo_apirecord").hide();
-                $("#pinfo_apiadvice").hide();
                 break;
             default:
                 lstatus = '';

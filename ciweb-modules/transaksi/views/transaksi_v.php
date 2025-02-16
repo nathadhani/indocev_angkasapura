@@ -24,8 +24,8 @@
                                 <?php 
                                     if($this->uri->segment(5) === '432d21') {
                                         echo 'Beli / Buy';
-                                    } else if($this->uri->segment(5) === '5239345c') {
-                                        echo 'Jual / Sale';
+                                    } else if($this->uri->segment(5) === '523d3455') {
+                                        echo 'Jual / Sell';
                                     }
                                 ?>
                             </span><br>        

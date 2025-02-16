@@ -8,6 +8,14 @@ class Api_ap extends Bks_Controller {
         $ApiMdl = New Apimdl;
         $this->auth = $this->session->userdata('auth');
         $this->userId = $this->auth['id'];
+        $this->usergroup_id = $this->auth['usergroup_id'];
+
+        $this->api_username = $this->auth['api_username'];
+        $this->api_password = $this->auth['api_password'];
+        if($this->usergroup_id == 1){
+            $this->api_username = 'api.indocev.sub';
+            $this->api_password = 'api.indocev.sub';    
+        }
     }
     
     function ap_post_api(){
@@ -40,26 +48,26 @@ class Api_ap extends Bks_Controller {
             $tr_date = revDate($postData['tr_date']);
         }                  
 
-        $url = 'https://api-ecsysdev.angkasapura2.co.id/api/auth/login'; // Trial
-        // $url  = 'https://api-ecsys.angkasapura2.co.id/api/auth/login'; // Production
+        // $url = 'https://api-ecsysdev.angkasapura2.co.id/api/auth/login'; // Trial
+        $url  = 'https://api-ecsys.angkasapura2.co.id/api/auth/login'; // Production
         $login = $this->ap_login($url);
         if($login) {
-            $resp_login = json_decode($login,true);
-            $token = $resp_login['token'];
+            $resp_login = json_decode($login,true);            
+            $token = (isset($resp_login['token']) ? $resp_login['token'] : '');
             if($token !== null && $token !== ''){
                 if($method === 'trxrecord'){
-                    $url = 'https://api-ecsysdev.angkasapura2.co.id/api/v1/transaction/'; // Trial
-                    // $url = 'https://api-ecsys.angkasapura2.co.id/api/v1/transaction/'; // Production
+                    // $url = 'https://api-ecsysdev.angkasapura2.co.id/api/v1/transaction/'; // Trial
+                    $url = 'https://api-ecsys.angkasapura2.co.id/api/v1/transaction/'; // Production
                     $this->ap_trx_reccord($url, $token, $method, $id);
 
                 } else if($method === 'refundtrx'){
-                    $url = 'https://api-ecsysdev.angkasapura2.co.id/api/v1/transaction/adjustment'; // Trial
-                    // $url = 'https://api-ecsys.angkasapura2.co.id/api/v1/transaction/adjustment'; // Production
+                    // $url = 'https://api-ecsysdev.angkasapura2.co.id/api/v1/transaction/adjustment'; // Trial
+                    $url = 'https://api-ecsys.angkasapura2.co.id/api/v1/transaction/adjustment'; // Production
                     $this->ap_trx_adjustment($url, $token, $method, $id);
 
                 } else if($method === 'gettrx'){
-                    $url = 'https://api-ecsysdev.angkasapura2.co.id/api/v1/simulation/'; // Trial
-                    // $url = 'https://api-ecsys.angkasapura2.co.id/api/v1/simulation/'; // Production
+                    // $url = 'https://api-ecsysdev.angkasapura2.co.id/api/v1/simulation/'; // Trial
+                    $url = 'https://api-ecsys.angkasapura2.co.id/api/v1/simulation/'; // Production
                     $this->db->truncate('trx_api_ap_get');
                     $this->ap_trx_get($url, $token, $company_id, $store_id, $tr_date, $method);
 
@@ -76,8 +84,8 @@ class Api_ap extends Bks_Controller {
     }
 
     public function ap_login($url){
-        // $data = json_encode(array('username'=>'api.indocev.cgk', 'password'=>'api.indocev.cgk')); // CGK
-        $data = json_encode(array('username'=>'api.icv', 'password'=>'api.icv')); // SBY
+        // $data = json_encode(array('username' => 'api.icv', 'password' => 'api.icv')); // For Trial
+        $data = json_encode(array('username' => $this->api_username, 'password' => $this->api_password)); // For Production
         $result = $this->Apimdl->callcurl($url, $data, null);
         return $result;
     }    

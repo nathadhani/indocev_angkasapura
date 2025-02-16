@@ -122,7 +122,7 @@ class Transaksi_show extends Bks_Controller {
             $tr_title = '** BUY SLIP **';
         }
         if($this->uri->segment(5) == 2) {
-            $tr_title = '** SALES SLIP **';
+            $tr_title = '** SELL SLIP **';
         }
         $Data .= str_repeat(' ', 1) . fBESAR12() . fTEBAL() . $tr_title . fUnTEBAL() . fUnBESAR12() . fKECIL10() . chr(10);
         $Data .= str_repeat(' ', 1) . 'No.Reff : ' . $tr_number. chr(10);
@@ -249,7 +249,7 @@ class Transaksi_show extends Bks_Controller {
             $tr_title = '** BUY SLIP **';
         }
         if($this->uri->segment(5) == 2) {
-            $tr_title = '** SALES SLIP **';
+            $tr_title = '** SELL SLIP **';
         }
         $pdf->Ln(1);
         $pdf->SetFont('', 'B', 9);

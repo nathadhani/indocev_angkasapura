@@ -55,7 +55,7 @@
                         <h5>Total Trx. <b style="color:blue;">Buy</b>  : <strong id="total_buy"></strong> ( <strong id="count_buy"></strong> )</h5> 
                     </div>
                     <div class="col-md-4">
-                        <h5>Total Trx. <b style="color:red;">Sale</b> : <strong id="total_sales"></strong> ( <strong id="count_sales"></strong> )</h5>
+                        <h5>Total Trx. <b style="color:red;">Sell</b> : <strong id="total_sales"></strong> ( <strong id="count_sales"></strong> )</h5>
                     </div>
                 </div>                
                 
@@ -67,7 +67,7 @@
                                     <th rowspan="2" style="vertical-align:middle;text-align:center;">#</th>
                                     <th rowspan="2"style="vertical-align:middle;text-align:center;">Currency</th>
                                     <th colspan="2" style="vertical-align:middle;text-align:center;background-color:blue;color:white;">Buy</th>
-                                    <th colspan="2" style="vertical-align:middle;text-align:center;background-color:red;color:white;">Sale</th>
+                                    <th colspan="2" style="vertical-align:middle;text-align:center;background-color:red;color:white;">Sell</th>
                                 </tr>
                                 <tr>
                                     <th style="vertical-align:middle;text-align:center;">Amount</th>

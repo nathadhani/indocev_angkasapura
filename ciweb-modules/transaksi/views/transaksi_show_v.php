@@ -31,8 +31,8 @@
                                     <?php 
                                         if($this->uri->segment(5) === '432d21') {
                                             echo 'Beli / Buy';
-                                        } else if($this->uri->segment(5) === '5239345c') {
-                                            echo 'Jual / Sale';
+                                        } else if($this->uri->segment(5) === '523d3455') {
+                                            echo 'Jual / Sell';
                                         }
                                     ?>
                                 </span><br>                                
@@ -84,8 +84,8 @@
                                     if($get_AP){                                                                          
                                         if($get_AP[0]->api_method === '1') {                     
                                 ?>
-                                            <a style="width:110px;" id="btn-submit" class="btn btn-primary" title="API - Input Transaction">API - Input</a>
-                                            <a style="width:110px;" id="btn-cancel" class="btn btn-primary" title="API - Transaction Adjusment">API - Adjustment</a>
+                                            <a style="width:110px;" id="btn-submit" class="btn btn-primary" title="API - Input Transaction">Submit</a>
+                                            <a style="width:110px;" id="btn-cancel" class="btn btn-primary" title="API - Transaction Adjusment">Cancel</a>
                                         <?php 
                                             } else {
                                         ?>   
@@ -110,9 +110,9 @@
                                             <?php                                   
                                                 if($get_AP[0]->api_method === '1') {
                                             ?>
-                                                <br>API Information :
-                                                <span id="pinfo_apirecord"><strong style="color:black;font-weight:bolder;"><br>API - Input </strong> : Untuk mengirim data transaksi ke angkasapura</span>
-                                                <span id="pinfo_apirefund"><strong style="color:black;font-weight:bolder;"><br>API - Adjustment </strong> : Untuk membatalkan transaksi atau membatalkan data transaksi yang sudah dikirimkan ke angkasapura</span>
+                                                <br>Information :
+                                                <span id="pinfo_apirecord"><strong style="color:black;font-weight:bolder;"><br>Submit </strong> : Untuk mengirim data transaksi ke angkasapura</span>
+                                                <span id="pinfo_apirefund"><strong style="color:black;font-weight:bolder;"><br>Cancel </strong> : Untuk membatalkan transaksi</span>
                                             <?php
                                                 }
                                             ?>

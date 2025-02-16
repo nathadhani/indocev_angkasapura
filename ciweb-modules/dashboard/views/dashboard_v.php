@@ -14,6 +14,7 @@
                     <div class="panel-title-box">
                         <h3>Dashboard</h3>
                     </div>
+                    <span class="pull-right" id="lastupdated"></span>
                 </div>                               
                 <div class="panel-body">
                     <div class="row">

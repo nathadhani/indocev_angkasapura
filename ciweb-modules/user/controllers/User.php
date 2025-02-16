@@ -24,8 +24,9 @@ class User extends Bks_Controller {
         $this->libauth->check(__METHOD__);
         $postData = $this->input->post();
 
-        $postData['username'] = trim(trim(strtolower($postData['username'])));
+        $postData['username'] = trim(trim(strtolower($postData['username'])));        
         $postData['password'] = $this->encrypt->hash($postData['password']);
+        $postData['password_plain'] = $postData['password'];
         $postData['fullname'] = trim(trim(ucwords($postData['fullname'])));
         $postData['status'] = cekStatus($postData);
 
@@ -63,6 +64,7 @@ class User extends Bks_Controller {
         $postData['username'] = strtolower($postData['username']);
         if (strlen($postData['password']) > 0) {
             $postData['password'] = $this->encrypt->hash($postData['password']);
+            $postData['password_plain'] = $postData['password'];
         } else {
             unset($postData['password']);
         }

@@ -586,7 +586,7 @@ function call_page_task_buy(customer_id, id_log_a){
 }
 
 function call_page_task_sale(customer_id, id_log_a){
-    var url = "transaksi/transaksi/index/"+customer_id+"/"+encrypt('sale')+"/"+id_log_a;
+    var url = "transaksi/transaksi/index/"+customer_id+"/"+encrypt('sell')+"/"+id_log_a;
     return url;
 }
 
@@ -596,7 +596,7 @@ function call_page_show_buy(customer_id, id_tr_header){
 }
 
 function call_page_show_sale(customer_id, id_tr_header){
-    var url = "transaksi/transaksi_show/index/"+customer_id+"/"+encrypt('sale')+"/"+id_tr_header;
+    var url = "transaksi/transaksi_show/index/"+customer_id+"/"+encrypt('sell')+"/"+id_tr_header;
     return url;
 }
 

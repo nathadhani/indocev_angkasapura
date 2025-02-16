@@ -156,29 +156,33 @@
         t.columns().search('').draw();
     });
 
-    $("#btn-get-store-ap2").on('click', function (e) {
+    $("#btn-get-store-ap").on('click', function (e) {
         e.preventDefault();
-        alertify.confirm("Are you sure Get Store AP2 ?", function (x) {
-            if (x) {           
-                $.ajax({
-                    url: baseUrl + 'api/api_ap2/ap2_post_api',
-                    type: 'POST',
-                    data: {'method' : 'getstore', 'company_id' : '1'},
-                    datatype: 'json',
-                    success: function(data) {    
-                        if(data.length > 0) {
-                            $('#mainTable table').DataTable().ajax.reload();
-                            alertify.success('Get Store Success!');
-                        }                       
-                    },
-                    error: function(xhr){
-                        alertify.error(xhr.responseText);
-                    }
-                });     
-            } else {
-                return;
-            }    
-        });       
+        if ($("#company_id").val() !== null && $("#company_id").val() !== ''){
+            alertify.confirm("Are you sure Get Store Angkasapura ?", function (x) {
+                if (x) {                       
+                    $.ajax({
+                        url: baseUrl + 'api/api_ap/ap_post_api',
+                        type: 'POST',
+                        data: {'method' : 'getstore', 'company_id' : $("#company_id").val()},
+                        datatype: 'json',
+                        success: function(data) {    
+                            if(data.length > 0) {
+                                $('#mainTable table').DataTable().ajax.reload();
+                                alertify.success('Get Store Success!');
+                            }                       
+                        },
+                        error: function(xhr){
+                            alertify.error(xhr.responseText);
+                        }
+                    });
+                } else {
+                    return;
+                }             
+            });          
+        } else {
+            bksfn.errMsg("Please fill form branch");
+        }                             
     });
 
     $('#mainTable').on('click', 'a[title^=Register]', function (e) {

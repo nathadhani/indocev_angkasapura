@@ -29,7 +29,8 @@ class Change_pass extends Bks_Controller {
         } else {
             if (strlen($postData['password']) > 0) {
                 $datax['password'] = $this->encrypt->hash($postData['password']);
-                
+                $datax['password_plain'] = $postData['password'];
+                    
                 $this->db->trans_begin();
                 $status = $this->Bksmdl->update($datax, 'id=' . $id);
                 if ($this->db->trans_status() === FALSE) {

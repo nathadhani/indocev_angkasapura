@@ -43,6 +43,7 @@ function loaddata(){
     getchart1(); 
     getdatatable2();
     getchart2();
+    getlastupdated();
 }
 
 function getdatatable1(){
@@ -261,6 +262,27 @@ function getchart2(){
             });
         }
     }        
+}
+
+
+function getlastupdated(){
+    $("#lastupdated").html('');
+    $.ajax({
+        url: baseUrl + 'dashboard/dashboard/getlastupdated',
+        type: 'POST',
+        data: {'company_id' : companyId,
+                'store_id' : storeId
+            },
+        dataType: 'json',
+        success: function (data) {
+            if (data !== '[]' && data.length > 0){
+                $("#lastupdated").html('Last Updated : ' + data[0].lastupdated);
+            }
+        },
+        error: function(xhr){
+            alertify.error(xhr.responseText);
+        }
+    });
 }
 
 
